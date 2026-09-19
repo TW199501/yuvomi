@@ -1,0 +1,23 @@
+public/settings/region-presets.js
+  s_f30eabba8a9dd5::t_5b40f603b0385b 77-80
+CHANGELOG.md
+  s_f30eabba8a9dd5::t_5b40f603b0385b 12-19
+public/utils/currency-codes.js
+  s_f30eabba8a9dd5::t_5b40f603b0385b 40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "0ae506af612ffc2f47177f3356524972add53a8a",
+  "prompts": {},
+  "sessions": {
+    "s_f30eabba8a9dd5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7c06a6d4-9fc7-477d-992c-15f2d3b45cb9",
+        "model": "claude-opus-5"
+      },
+      "human_author": "楊清雲 <41539966+TW199501@users.noreply.github.com>"
+    }
+  }
+}
