@@ -1,0 +1,291 @@
+CHANGELOG.md
+  s_f30eabba8a9dd5::t_cd41d727b1580c 20-23,71-80,87-90,113-193,210-226,447-469
+.github/umbrel-release-notes.md
+  s_f30eabba8a9dd5::t_58de050ac44d71 1-2,4,6,8-10,14
+README.de.md
+  s_f30eabba8a9dd5::t_9a6f7567298e23 89
+README.md
+  s_f30eabba8a9dd5::t_a1c867c377cb23 89
+docs/DECISIONS.md
+  s_f30eabba8a9dd5::t_63767bf4553214 385-436
+docs/ROADMAP.md
+  s_f30eabba8a9dd5::t_4df4d8662ca76b 121-135
+docs/SPEC.md
+  s_f30eabba8a9dd5::t_f1b0cb21a55a22 829,864-865,1698,1702,1715,1717-1719,1721-1723,1726,1736-1757,3026,3057-3058,3065-3066,3116-3128,3640-3694,4711,4722,4727,5040,5396
+docs/index.html
+  s_f30eabba8a9dd5::t_ac91c43ef4a87b 1022,1212,1563,1654,1768
+docs/install.html
+  s_f30eabba8a9dd5::t_ba9e85aee5b3c2 959
+docs/installation.md
+  s_f30eabba8a9dd5::t_d748ee2250a21d 242,244,253,262,307
+docs/test-suites.md
+  s_f30eabba8a9dd5::t_cd175ca3d88dec 9,14-16,19,24-26,40,61,68,85-88,116,199,203,230-231,263,266
+package-lock.json
+  s_f30eabba8a9dd5::t_18f73630ef6634 3,9
+package.json
+  s_f30eabba8a9dd5::t_a4f8ccfab563f7 3,34,112,145,156,162-163,174-175,218,222,241,352,374
+public/components/fasting-controls.js
+  s_f30eabba8a9dd5::t_a47725d6a1eb16 6,35,49-52,67,86-88,90-91,122-123
+public/components/modal.js
+  s_f30eabba8a9dd5::t_54f3dbd6672a11 15,644-653,656,658,1179-1272,1292-1296,1301,1351-1362,1566,1623,1682,1768-1805,1810
+public/locales/ar.json
+  s_f30eabba8a9dd5::t_5fdd08a430aedb 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/cs.json
+  s_f30eabba8a9dd5::t_4c8ec303b9e892 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/de.json
+  s_f30eabba8a9dd5::t_5203262188aefc 7,951,957,1068-1071,1575-1576,2714-2716,2750-2776,4021,4034-4037,4069,4300-4341
+public/locales/el.json
+  s_f30eabba8a9dd5::t_29fa3cd4555e81 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/en.json
+  s_f30eabba8a9dd5::t_650e9e4149df56 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/es.json
+  s_f30eabba8a9dd5::t_7f2c87d148e9f8 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/fa.json
+  s_f30eabba8a9dd5::t_8381f453f0e736 7,951,957,1068-1071,1575-1576,2714-2716,2750-2776,4021,4034-4037,4069,4300-4341
+public/locales/fil.json
+  s_f30eabba8a9dd5::t_bf215e7a4f664f 7,951,957,1068-1071,1575-1576,2714-2716,2750-2776,4021,4034-4037,4069,4300-4341
+public/locales/fr.json
+  s_f30eabba8a9dd5::t_76f5e8e37b386e 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/hi.json
+  s_f30eabba8a9dd5::t_a8ec8065a1e4ee 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/hu.json
+  s_f30eabba8a9dd5::t_db5d7b84a4a74d 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/id.json
+  s_f30eabba8a9dd5::t_a0c0ef1c93c41e 7,951,957,1068-1071,1575-1576,2714-2716,2750-2776,4021,4034-4037,4069,4300-4341
+public/locales/it.json
+  s_f30eabba8a9dd5::t_eacd4f21dce8dc 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/ja.json
+  s_f30eabba8a9dd5::t_b94df19e61f22d 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/ko.json
+  s_f30eabba8a9dd5::t_803050dff87f33 7,951,957,1068-1071,1575-1576,2714-2716,2750-2776,4021,4034-4037,4069,4300-4341
+public/locales/nl.json
+  s_f30eabba8a9dd5::t_c1046df238c080 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/pl.json
+  s_f30eabba8a9dd5::t_9b5deb9bdbe474 7,951,957,1068-1071,1575-1576,2714-2716,2750-2776,4021,4034-4037,4069,4300-4341
+public/locales/pt.json
+  s_f30eabba8a9dd5::t_f4b27bcb970567 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/ru.json
+  s_f30eabba8a9dd5::t_722edb7f33cfff 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/sv.json
+  s_f30eabba8a9dd5::t_070d87adbfdb42 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/tr.json
+  s_f30eabba8a9dd5::t_23e66d132a3d49 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/uk.json
+  s_f30eabba8a9dd5::t_efe16745ba6281 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/vi.json
+  s_f30eabba8a9dd5::t_99aa4ca1042b82 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/locales/zh.json
+  s_f30eabba8a9dd5::t_306f726dfe4c2a 7,939,945,1056-1059,1563-1564,2702-2704,2738-2764,4021,4034-4037,4069,4300-4341
+public/pages/birthdays.js
+  s_f30eabba8a9dd5::t_a907b664b503e6 11,35-54,270-276,279,287,301,309,330,358-361,376-387,389,393,400-428,453-455,480-481,483-485,494,510-512,532,731,826,863-873
+public/pages/calendar.js
+  s_f30eabba8a9dd5::t_a13da8906be4e0 9,4056-4058,5368-5371,5417-5472,5882-5901,5996,6008-6011,6137-6143,6145-6169,6171-6178,6180-6185,6189-6233,6328
+public/pages/contacts.js
+  s_f30eabba8a9dd5::t_df795e53403d9b 23,119-170,204,221-225,288,325-327,332-333,339-340,379-381,480-517,538,717-721,948-952,978-982,1029,1232,1385,1406,1567,1625-1637
+public/pages/health.js
+  s_f30eabba8a9dd5::t_fe1a95aab208fd 21,58,260-266,304-305,364-365,392-394,434,445,456,3640-4059
+public/pages/notes.js
+  s_f30eabba8a9dd5::t_fe763d0c55e7fe 34,78-129,138-145,179-181,274-281,313-316,320-322,469,496-530,548,573,576,683-713,715-720,1257-1261,1323,1353,1372-1387
+public/reminders.js
+  s_f30eabba8a9dd5::t_06b1bc3454573a 68,70,75-81,186-188,191-195,238-239,290-303,307-310,333-336,342,350-351,362,372,376,448-450
+public/settings/pages/modules-health.js
+  s_f30eabba8a9dd5::t_ec60d3f6773e9b 1-240
+public/settings/pages/personal-health.js
+  s_f30eabba8a9dd5::t_736300f08b733d 32,90-100,132-148
+public/settings/registry.js
+  s_f30eabba8a9dd5::t_a6e53983ca6c57 220-233,429-432
+public/styles/fasting-controls.css
+  s_f30eabba8a9dd5::t_469705cc526a0d 8,13-14
+public/styles/health.css
+  s_f30eabba8a9dd5::t_a06a60c64da665 1212-1288,1312-1406
+public/styles/notes.css
+  s_f30eabba8a9dd5::t_e2d45ad9616249 282-283,289-314
+public/styles/reminders.css
+  s_f30eabba8a9dd5::t_1a211442d49efe 59-74
+public/styles/settings.css
+  s_f30eabba8a9dd5::t_0fb504c1528f83 3324-3333
+public/sw.js
+  s_f30eabba8a9dd5::t_e567a87f6a4e9c 20,149,326
+public/utils/health-fasting.js
+  s_f30eabba8a9dd5::t_cf01986bee93d7 83-87
+public/utils/health-prevention.js
+  s_f30eabba8a9dd5::t_26417e1d57ab44 1-37
+public/utils/health-tabs.js
+  s_f30eabba8a9dd5::t_fa0dec2a400203 4,14,28,69-70
+public/utils/kitchen-transfer.js
+  s_f30eabba8a9dd5::t_cdf97036ea0377 37-41
+public/utils/module-access.js
+  s_f30eabba8a9dd5::t_b3721a0d31e9ab 98-105
+server/auth.js
+  s_f30eabba8a9dd5::t_94bdca48d951bf 23,2977-2979
+server/db-schema-test.js
+  s_f30eabba8a9dd5::t_aaa67fd77a383e 1343-1375
+server/db.js
+  s_f30eabba8a9dd5::t_2c2ab917dcb764 23,432-437,696-853,9129-9287
+server/openapi/paths/health.js
+  s_f30eabba8a9dd5::t_0f4d830584ddee 19,122,214-232
+server/openapi/paths/meals.js
+  s_f30eabba8a9dd5::t_7e37d6b21d38e1 21-22,24-37,40-52
+server/openapi/paths/recipes.js
+  s_f30eabba8a9dd5::t_85d15635d67398 14-27
+server/openapi/paths/shopping.js
+  s_f30eabba8a9dd5::t_1049e3adecdb89 53,57-62,149-162
+server/routes/health.js
+  s_f30eabba8a9dd5::t_ce78a6b6957380 19,43,60
+server/routes/health/caregivers.js
+  s_f30eabba8a9dd5::t_32c9751f6c0cac 15,97-104
+server/routes/health/fasting.js
+  s_f30eabba8a9dd5::t_6c1d816af9bdd1 98-99
+server/routes/health/prevention.js
+  s_f30eabba8a9dd5::t_7eafc76a7d5164 1-374
+server/routes/health/visibility-defaults.js
+  s_f30eabba8a9dd5::t_1f0a634120658b 37
+server/routes/meals.js
+  s_f30eabba8a9dd5::t_ddda0c6a698aac 13,746-763,845-850
+server/routes/permissions.js
+  s_f30eabba8a9dd5::t_a07da9c8614df1 15,19,22,27-40,94-99,143
+server/routes/preferences.js
+  s_f30eabba8a9dd5::t_2e82220099e226 20-21,616-619,666,921-926,1067-1079,1356-1359
+server/routes/recipes.js
+  s_f30eabba8a9dd5::t_c271121fe24fbb 14,367-375
+server/routes/reminders.js
+  s_f30eabba8a9dd5::t_e52c6505ae720a 22,97-101,105,222-226,289-300
+server/routes/shopping.js
+  s_f30eabba8a9dd5::t_3b04e18acf58a9 25,650-665,1180-1195
+server/services/apple-calendar.js
+  s_f30eabba8a9dd5::t_9f1161994eed9b 21,312-314,317-320,326,418,447-453
+server/services/caldav-sync.js
+  s_f30eabba8a9dd5::t_3c5d89af64610e 12,509,714-720
+server/services/calendar-events.js
+  s_f30eabba8a9dd5::t_65861524c1a511 7,185-189,218-242,264
+server/services/calendar-occurrence-overrides.js
+  s_f30eabba8a9dd5::t_c7cae9c230e4b7 15-17,807-817,825-865,892-912,920,937-951,978,980,1207,1209-1210,1451-1453
+server/services/cycle-reminders.js
+  s_f30eabba8a9dd5::t_06f2b8232b7f12 65-71
+server/services/fasting-reminders.js
+  s_f30eabba8a9dd5::t_23fab1582fa843 1-131
+server/services/fasting.js
+  s_f30eabba8a9dd5::t_08ce3ccccb385d 5,117-123,336-340,377-381,406-410,420-421,426-430,434-438,453-454,467-468,473-476,479-480,482
+server/services/google-calendar.js
+  s_f30eabba8a9dd5::t_a26e449fc75db0 29,993,1040-1046
+server/services/ics-parser.js
+  s_f30eabba8a9dd5::t_3788e7eea1adb8 8-10,12,375-379,399-406,411-412
+server/services/inventory-deadlines.js
+  s_f30eabba8a9dd5::t_8b65c498dbdce9 7-10,14,18
+server/services/notifications.js
+  s_f30eabba8a9dd5::t_7f0858838b5102 22-24,130-132,235-254,275-278,428-438,472-478,481,508-512,555-562,584-595
+server/services/prevention-due.js
+  s_f30eabba8a9dd5::t_a8d449041d8a8e 1-74
+server/services/prevention-reminders.js
+  s_f30eabba8a9dd5::t_a1edc744087c8b 1-203
+server/services/recurrence.js
+  s_f30eabba8a9dd5::t_5faddcc6470940 29,69-74,98,154-229,815
+server/services/reminder-origins.js
+  s_f30eabba8a9dd5::t_d15746705c0d0d 7-10,13-16,37,42-43,94-179
+server/services/subscriptions.js
+  s_f30eabba8a9dd5::t_330e4a9e691464 2,7-8,14-17
+server/services/sync-assignment.js
+  s_f30eabba8a9dd5::t_378694b72f6592 57-67,83-97,100-107,113,241-361
+server/utils/interval-date.js
+  s_f30eabba8a9dd5::t_c465f57a2a8d1b 1-54
+test/calendar-scope-question.js
+  s_f30eabba8a9dd5::t_b771dc6ac1cb15 1-108
+test/document-guards-harness.js
+  s_f30eabba8a9dd5::t_e338ffe1ae9bd9 41,649-694
+test/helpers/migrated-database.js
+  s_f30eabba8a9dd5::t_d4ab29817a07a5 1-41
+test/test-admin-password-reset.js
+  s_f30eabba8a9dd5::t_5a076a03d33b60 18-19,60-85,151-193
+test/test-browser-loader.mjs
+  s_f30eabba8a9dd5::t_6b50deb74a7f3e 116-118,121-127,232-234
+test/test-caldav-until-time.js
+  s_f30eabba8a9dd5::t_7e8ae145c817fb 1-311
+test/test-calendar-occurrence-overrides.js
+  s_f30eabba8a9dd5::t_ec693d2a9de58e 173,177-193,1349,1352,1372-1375,1378,1435-1436,1440-1635,2057,2183,2653,2664,2720,2913-2914,3085-3089,3093-3094,3500,3625-3626
+test/test-calendar-occurrence-scope.js
+  s_f30eabba8a9dd5::t_8bc3f52876bdf6 1-705
+test/test-calendar-reminder-after-start.js
+  s_f30eabba8a9dd5::t_20cc7e87d41adc 48,121-123,128,263-265,280,309-313,315,318-320,339,341,345,347,606-610,637-639,648,650,661,664,666-670,677-738,741,743,755,759,769,773,782-784
+test/test-calendar-routes.js
+  s_f30eabba8a9dd5::t_80b48bcb91c02b 2112-2129,2140,2175-2177
+test/test-cross-module-write-rights.js
+  s_f30eabba8a9dd5::t_eec61c37816577 1-319
+test/test-db-encryption.js
+  s_f30eabba8a9dd5::t_416c8e827e3581 26,1776-2012
+test/test-denied-module-reminders.js
+  s_f30eabba8a9dd5::t_a2fe189a0e67de 1-347
+test/test-document-guards.js
+  s_f30eabba8a9dd5::t_e709f0a6f63421 38,329,363,373,412,574,576-577,580,591-592,594,614,627-628,4389,4600,5029,5119
+test/test-fasting-notification-availability.js
+  s_f30eabba8a9dd5::t_ef7a9505311500 1-10
+test/test-fasting-reminders-api.js
+  s_f30eabba8a9dd5::t_58cb157175190f 1-101
+test/test-fasting-reminders-browser.js
+  s_f30eabba8a9dd5::t_c648529b19acb0 1-56
+test/test-fasting-reminders-migration.js
+  s_f30eabba8a9dd5::t_4a05213e57d392 1-65
+test/test-fasting-reminders-transactions.js
+  s_f30eabba8a9dd5::t_fb42339a70a786 1-90
+test/test-fasting-reminders.js
+  s_f30eabba8a9dd5::t_7eb1772b80ce88 1-134
+test/test-health-fasting-service.js
+  s_f30eabba8a9dd5::t_371b274e01c49d 7,15,18-36,78-94,112,136
+test/test-health-nav.js
+  s_f30eabba8a9dd5::t_0effcba4a7ea58 49,51,63,65,69,72,78,81,190-191
+test/test-health-prevention-interval.js
+  s_f30eabba8a9dd5::t_019f28f0c6bfd7 1-47
+test/test-health-prevention.js
+  s_f30eabba8a9dd5::t_5a24a43946aa2e 1-363
+test/test-health-structure.js
+  s_f30eabba8a9dd5::t_d350b5c832a3be 5-8,42,144-153,159-163,170
+test/test-health-visibility-defaults.js
+  s_f30eabba8a9dd5::t_ee682422bc80d1 116,119,127-131,150-173
+test/test-ics-parser.js
+  s_f30eabba8a9dd5::t_c2bcf6a24fb3d7 309-336
+test/test-interval-date.js
+  s_f30eabba8a9dd5::t_c55ca3e3cf3332 1-50
+test/test-modal-dead-time.js
+  s_f30eabba8a9dd5::t_1b0ab20ed46051 1-421
+test/test-modal-utils.js
+  s_f30eabba8a9dd5::t_98adaa24c42650 205-240
+test/test-module-readonly-ui.js
+  s_f30eabba8a9dd5::t_3985a09ce3417b 82-85,1280-1742
+test/test-notifications.js
+  s_f30eabba8a9dd5::t_e399ebd28bb0b7 27-30,45-57,100-113,144,150-153,748-842
+test/test-permissions-routes.js
+  s_f30eabba8a9dd5::t_5ff8e5a0992239 206-280
+test/test-preferences-routes.js
+  s_f30eabba8a9dd5::t_c8f1ba7e9cf12a 402-442
+test/test-prevention-reminders.js
+  s_f30eabba8a9dd5::t_03160967efa6b7 1-327
+test/test-push.js
+  s_f30eabba8a9dd5::t_91e9cb4799c6a4 21-24,45-69,94,100-103
+test/test-recurring-scope.js
+  s_f30eabba8a9dd5::t_c0091fe5c7b175 590-592,594-596
+test/test-reminders-browser-notification.js
+  s_f30eabba8a9dd5::t_0b80f8c1484296 1-123
+test/test-reminders-routes.js
+  s_f30eabba8a9dd5::t_04d86eea864630 91-103,158-162,164-185,226-259
+test/test-settings-navigation.js
+  s_f30eabba8a9dd5::t_7110179dcdb1be 149-151,154,357,360-363,374-381
+test/test-suite-chain.js
+  s_f30eabba8a9dd5::t_d344ee1f413cd3 33-36,38-39
+test/test-sync-calendar-move-assignment.js
+  s_f30eabba8a9dd5::t_aa2bcec56e4bd4 1-581
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5cfa579d003e82a7b0ec8bd921a7495fdd90a00b",
+  "prompts": {},
+  "sessions": {
+    "s_f30eabba8a9dd5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7c06a6d4-9fc7-477d-992c-15f2d3b45cb9",
+        "model": "claude-opus-5"
+      },
+      "human_author": "楊清雲 <41539966+TW199501@users.noreply.github.com>"
+    }
+  }
+}
