@@ -1,0 +1,39 @@
+public/i18n.js
+  s_8477b16215e819::t_0eedd4ca81c92a 14
+public/locales/zh-Hant.json
+  s_8477b16215e819::t_2fe67ed256e7b1 1-5977
+test/test-lang-init.js
+  s_8477b16215e819::t_8462cfe40f74a9 217-223
+public/lang-init.js
+  s_8477b16215e819::t_a873759d697052 18
+server/routes/weather.js
+  s_8477b16215e819::t_98b21babcf966d 113
+test/test-document-folder-keys.js
+  s_8477b16215e819::t_385f88614a24d7 135
+test/test-language-lists.js
+  s_8477b16215e819::t_4b0d0daf1b7d5a 60
+test/i18n-translated-baseline.json
+  s_8477b16215e819::t_5577830b098a27 26-27,53-54
+public/sw.js
+  s_8477b16215e819::t_246b4076bb7782 283
+test/test-i18n.js
+  s_8477b16215e819::t_eebafc44ab1216 504,510
+test/test-region-presets.js
+  s_8477b16215e819::t_6e388e8766bd48 580-582,589-590,609-610
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d4cd3aecb1252244145c146aba68a20e7a30de71",
+  "prompts": {},
+  "sessions": {
+    "s_8477b16215e819": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4ce425e-bcc0-43e6-bfdf-ab65654dcb15",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "楊清雲 <41539966+TW199501@users.noreply.github.com>"
+    }
+  }
+}
