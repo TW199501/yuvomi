@@ -1,0 +1,33 @@
+install.sh
+  s_8477b16215e819::t_30b374d840e69b 33-36,38,41,43-49,52-59
+  s_8477b16215e819::t_07c683e27fc963 26
+test/test-installer-cli-i18n.js
+  s_8477b16215e819::t_b02801e5ef9d61 127-137
+test/test-installer-i18n.js
+  s_8477b16215e819::t_6892bfa72087b1 282-289
+tools/installer/i18n-mini.js
+  s_8477b16215e819::t_7b7738bb6db97c 41,43-45,48,55-63,66-70
+  s_8477b16215e819::t_c1854c93590734 9
+tools/installer/install.html
+  s_8477b16215e819::t_643afe9b6c3907 2473
+tools/installer/locales/cli/zh-Hant.sh
+  s_8477b16215e819::t_b6ef4b7bb33861 1-117
+tools/installer/locales/zh-Hant.json
+  s_8477b16215e819::t_cb35752cca0458 1-336
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fbb3201f089e4282ba1df2535cef904b139c35ca",
+  "prompts": {},
+  "sessions": {
+    "s_8477b16215e819": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4ce425e-bcc0-43e6-bfdf-ab65654dcb15",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "楊清雲 <41539966+TW199501@users.noreply.github.com>"
+    }
+  }
+}
