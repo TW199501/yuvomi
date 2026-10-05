@@ -1,0 +1,35 @@
+CHANGELOG.md
+  s_8477b16215e819::t_a052dc24b15059 10-18
+CONTRIBUTING.md
+  s_8477b16215e819::t_0d90cb97e34a41 348
+MODULES.md
+  s_8477b16215e819::t_c9ede0be50c437 176
+README.de.md
+  s_8477b16215e819::t_86d8c831452d0f 34,198,254
+README.md
+  s_8477b16215e819::t_b76a8d80cde7b6 34,197,251
+docs/SCOPE.md
+  s_8477b16215e819::t_ed1d3a63aa0af9 295
+docs/SPEC.md
+  s_8477b16215e819::t_b73f5c69cd3124 5240,5844,5862
+docs/installation.md
+  s_8477b16215e819::t_efc28cacb57d98 13,31,254
+tools/installer/README.md
+  s_8477b16215e819::t_ebcc4775527cca 155,161
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ce63b7f15660e00a0fcdee266e8445b885d342d1",
+  "prompts": {},
+  "sessions": {
+    "s_8477b16215e819": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4ce425e-bcc0-43e6-bfdf-ab65654dcb15",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "楊清雲 <41539966+TW199501@users.noreply.github.com>"
+    }
+  }
+}
