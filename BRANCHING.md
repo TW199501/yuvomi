@@ -19,6 +19,8 @@
 
 行尾：LF，由 `.gitattributes` 規定（範本：elf-team-rule `assets/gitattributes`）
 
+CI：上游的 `ci.yml` 只在 push／PR `main` 時執行；`dev`、`release`、`hotfix/**` 的 check run 由本 fork 專用的 `.github/workflows/fork-ci.yml` 產生，彙總 check 名為 `ci`。上游改了 `ci.yml` 的步驟時要跟著改。
+
 ## 遠端設定
 
 ```
