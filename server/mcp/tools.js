@@ -11,7 +11,7 @@
  *      erbt exakt die Rechte des aufrufenden API-Tokens; Rollen- und
  *      CSRF-Prüfung greifen serverseitig auf `/api/v1/*` wie bei jedem Client.
  * Abhängigkeiten: server/middleware/validate.js, server/openapi.js,
- *                  server/scopes.js + server/permissions.js (Rechte-Durchsetzung)
+ *                  server/scopes.js + server/authorize/ (Rechte-Durchsetzung)
  *
  * Architektur: Jedes Tool ist EIN Eintrag in der Registry (Definition + Handler
  *   zusammen) — daraus werden `tools/list` und der Dispatch abgeleitet, damit
@@ -24,11 +24,9 @@
 import * as v from '../middleware/validate.js';
 import { readFileSync } from 'node:fs';
 import { buildOpenApiSpec } from '../openapi.js';
-import { tokenAllows } from '../scopes.js';
-import { moduleAccessVerdict, MODULE_ACCESS_ALLOW } from '../permissions.js';
+import { authorize, visibleWhere } from '../authorize/index.ts';
 import { householdTimeZone, todayKey } from '../utils/timezone.js';
 import { taskScopeNeedsToday, taskScopeWhere } from '../services/task-scope.js';
-import { visibilityWhere } from '../services/visibility.js';
 import { getUpcomingEvents } from '../services/calendar-event-reader.js';
 import { loadTagsFor, normalizeTags, setTags, tagKey } from '../utils/task-tags.js';
 import { readBindAddress, selfCallHost } from '../utils/bind-address.js';
@@ -57,7 +55,7 @@ function listTasks(db, actorId, args) {
       -- anderer. Stand hier bisher nicht, obwohl die Termin-Abfrage sie führt -
       -- ein MCP-Token sah damit jede private Aufgabe des Haushalts, und mit den
       -- Tags (#586) käme deren Freitext gleich mit.
-      AND ${visibilityWhere('t', 'task_assignments', 'task_id', '@me')}
+      AND ${visibleWhere('tasks', 't', '@me')}
   `;
   // Dieselbe Auswahl wie `GET /api/v1/tasks` und die Uebersicht (#825): eine
   // Automatisierung, die andere Aufgaben sieht als das UI, ist der Grund, aus
@@ -556,7 +554,8 @@ async function internalApiRequest(ctx, method, path, { query, payload, contentDa
 
 // --------------------------------------------------------
 // Registry: Definition + Handler je Tool an EINER Stelle.
-// `handler(ctx, args)` mit ctx = { db, actor: { id, role }, requestHeaders }.
+// `handler(ctx, args)` mit ctx = { db, actor, requestHeaders }; der Akteur kommt
+// aus server/authorize/ (`actorFromRequest`), die Handler lesen `actor.userId`.
 // --------------------------------------------------------
 
 const CORE_TOOLS = [
@@ -576,7 +575,7 @@ const CORE_TOOLS = [
         },
       },
     },
-    handler: (ctx, args) => listTasks(ctx.db, ctx.actor.id, args),
+    handler: (ctx, args) => listTasks(ctx.db, ctx.actor.userId, args),
   },
   {
     name: 'create_task',
@@ -599,7 +598,7 @@ const CORE_TOOLS = [
       },
       required: ['title'],
     },
-    handler: (ctx, args) => createTask(ctx.db, ctx.actor.id, args),
+    handler: (ctx, args) => createTask(ctx.db, ctx.actor.userId, args),
   },
   {
     name: 'list_shopping_items',
@@ -627,7 +626,7 @@ const CORE_TOOLS = [
       },
       required: ['name'],
     },
-    handler: (ctx, args) => addShoppingItem(ctx.db, ctx.actor.id, args),
+    handler: (ctx, args) => addShoppingItem(ctx.db, ctx.actor.userId, args),
   },
   {
     name: 'list_upcoming_events',
@@ -639,7 +638,7 @@ const CORE_TOOLS = [
         limit: { type: 'integer', description: 'Max number of events (1-100, default 20).' },
       },
     },
-    handler: (ctx, args) => listUpcomingEvents(ctx.db, ctx.actor.id, args),
+    handler: (ctx, args) => listUpcomingEvents(ctx.db, ctx.actor.userId, args),
   },
   {
     name: 'create_event',
@@ -657,7 +656,7 @@ const CORE_TOOLS = [
       },
       required: ['title', 'start_datetime'],
     },
-    handler: (ctx, args) => createEvent(ctx.db, ctx.actor.id, args),
+    handler: (ctx, args) => createEvent(ctx.db, ctx.actor.userId, args),
   },
 ];
 
@@ -792,7 +791,7 @@ const TOOL_MAP = new Map(ALL_TOOLS.map((t) => [t.name, t]));
  * Guest-Guard vom echten Middleware-Stapel. Ausnahme sind Split-Guests, die
  * gar keinen Haushaltszugriff haben — für sie sind alle Kern-Tools zu.
  *
- * @param {{ scopes?: string[]|null, moduleAccess?: object|null, splitGuest?: boolean, display?: boolean }|null} actor
+ * @param {{ kind?: string, userId?: number|null, role?: string|null, familyRole?: string|null, scopes?: readonly string[]|null, moduleAccess?: object|null, unresolved?: boolean }|null} actor
  * @param {{ scope?: { module: string, access: 'read'|'write' } }} tool
  * @returns {boolean}
  */
@@ -817,21 +816,26 @@ function toolAllowed(actor, tool) {
   // OFFEN UND NICHT HIER ENTSCHIEDEN: dass ein Gast ueber die beiden anderen
   // den vollstaendigen OpenAPI-Katalog liest, obwohl `/openapi.json` ueber REST
   // administratorgesperrt ist. Das ist ein eigener Befund, aelter als #1208.
-  if (actor && actor.display) return false;
+  // `unresolved`: a lookup that decides the kind failed or contradicts the other
+  // (server/authorize/) - closed like a display, as the old lookups said true then.
+  if (actor && (actor.kind === 'display' || actor.unresolved)) return false;
   if (!tool.scope) return true;
   // Gast-Konten für geteilte Ausgaben erreichen unter /api/v1 nur
   // /split-expenses; kein Kern-Tool liegt dort, also alle gesperrt.
-  if (actor && actor.splitGuest) return false;
-  const scopes = actor ? (actor.scopes ?? null) : null;
-  if (!tokenAllows(scopes, tool.scope.module, tool.scope.access)) return false;
-  const moduleAccess = actor ? (actor.moduleAccess ?? null) : null;
-  return moduleAccessVerdict(moduleAccess, tool.scope.module, tool.scope.access) === MODULE_ACCESS_ALLOW;
+  if (actor && actor.kind === 'guest') return false;
+  // No actor: neither scopes nor module rights narrow anything, and the tool is
+  // allowed, as before B2 (`listToolDefinitions()` without an actor lists every
+  // tool). authorize() answers `null` with 'no_actor', so it is caught here.
+  if (!actor) return true;
+  // Token scopes, then the module rights - the module verdict of server/authorize/.
+  const verdict = authorize(/** @type {import('../authorize/index.ts').Actor} */ (actor), tool.scope.access, { module: tool.scope.module });
+  return verdict.allowed;
 }
 
 /**
  * Tool-Definitionen für `tools/list`, gefiltert auf das, was der Akteur wirklich
  * aufrufen darf — ein LLM sieht kein Tool, das ihm der nächste Aufruf verweigert.
- * @param {{ scopes?: string[]|null, moduleAccess?: object|null, splitGuest?: boolean, display?: boolean }|null} actor
+ * @param {{ kind?: string, userId?: number|null, role?: string|null, familyRole?: string|null, scopes?: readonly string[]|null, moduleAccess?: object|null, unresolved?: boolean }|null} actor
  * @returns {Array<{ name: string, description: string, inputSchema: object }>}
  */
 function listToolDefinitions(actor = null) {
@@ -842,7 +846,7 @@ function listToolDefinitions(actor = null) {
 
 /**
  * Führt ein Tool aus.
- * @param {{ db: object, actor: { id: number, role?: string, scopes?: string[]|null, moduleAccess?: object|null, splitGuest?: boolean }, requestHeaders?: object }} ctx
+ * @param {{ db: object, actor: { kind?: string, userId: number|null, role?: string|null, familyRole?: string|null, scopes?: readonly string[]|null, moduleAccess?: object|null, unresolved?: boolean }, requestHeaders?: object }} ctx
  * @param {string} name  - Tool-Name
  * @param {object} args  - Tool-Argumente
  * @returns {Promise<any>} rohes Ergebnis (wird vom Protokoll-Layer serialisiert)
