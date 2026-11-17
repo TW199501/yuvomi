@@ -1,0 +1,193 @@
+name: Fork CI
+
+# 本 fork（TW199501/yuvomi）專用，不送上游。
+#
+# 上游的 ci.yml 只在 push main、PR 到 main 時執行，dev、release、hotfix/** 的提交上
+# 沒有 check run，release 就無法依分支規範（BRANCHING.md）快轉。這個 workflow 對這些
+# 分支跑與 ci.yml 相同的測試、型別檢查與 lint；ci.yml 本身不動，同步上游時不會衝突。
+# 上游改了 ci.yml 的步驟時，這裡要跟著改。
+#
+# 不含 restore-drill：它從本 repo 的 releases 下載語料庫資料，fork 沒有發佈 releases。
+
+on:
+  push:
+    branches: [dev, release, 'hotfix/**']
+  pull_request:
+    branches: [dev, release]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fork-ci-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  test:
+    name: Tests (Node.js ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    strategy:
+      matrix:
+        node-version: [24.x, 26.x]
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      # test:changelog 需要 CHANGELOG 最新一節的發佈 tag。fork 不會自動帶上游之後的
+      # tag，所以 tag 一律從上游取；分支這一側的來源與 ci.yml 相同。
+      - name: Fetch the release tag of the newest CHANGELOG section
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          UPSTREAM: https://github.com/ulsklyc/yuvomi.git
+        run: |
+          case "$EVENT_NAME" in
+            pull_request) source=HEAD^1 ;;
+            push)
+              source=HEAD^1
+              if [ -z "$PUSH_BEFORE" ] || [ "$PUSH_BEFORE" = 0000000000000000000000000000000000000000 ]; then
+                echo "No pre-push revision - reading the CHANGELOG reference from HEAD^1."
+              elif git cat-file -e "${PUSH_BEFORE}^{commit}" 2>/dev/null \
+                || git fetch --no-tags --depth=1 origin "$PUSH_BEFORE"; then
+                source=$PUSH_BEFORE
+              else
+                echo "Pre-push revision $PUSH_BEFORE is not available - reading the CHANGELOG reference from HEAD^1."
+              fi
+              ;;
+            *)
+              source=HEAD
+              ;;
+          esac
+          for version in $(git show "${source}:CHANGELOG.md" | grep -oE '^## \[[0-9]+\.[0-9]+\.[0-9]+\]' | head -n 2 | tr -d '#[] '); do
+            if git fetch --no-tags --depth=2 "$UPSTREAM" "+refs/tags/v${version}:refs/tags/v${version}"; then
+              exit 0
+            fi
+          done
+          echo "No release tag found - the released-section guard in test:changelog will skip."
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the web app
+        run: npm run build
+
+      - name: Check that the build is deterministic
+        run: node scripts/check-build-determinism.mjs
+
+      - name: Run tests
+        run: npm run test-parallel -- --jobs 4 --logs "$RUNNER_TEMP/test-logs"
+
+      - name: Upload the test logs
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: test-logs-node-${{ matrix.node-version }}
+          path: ${{ runner.temp }}/test-logs
+          if-no-files-found: ignore
+          retention-days: 7
+
+  fasting-browser:
+    name: Fasting browser suite (Node.js 24.x)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js 24.x
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24.x
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the web app (browser test layout)
+        run: npm run build:browser-tests
+
+      - name: Run the fasting browser suite
+        run: npm run test:fasting-browser
+
+  typecheck:
+    name: Typecheck (Node.js 24.x)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js 24.x
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24.x
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check against the baseline
+        run: npm run typecheck
+
+  lint:
+    name: Lint (Node.js 24.x)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js 24.x
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24.x
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint against the baseline
+        run: npm run lint
+
+      - name: Audit the workflows (zizmor)
+        if: ${{ !cancelled() }}
+        uses: zizmorcore/zizmor-action@45d7276c9ca790aabd705e31ca99c6185c3e76dd # v0.8.1
+        with:
+          version: 1.32.0
+          online-audits: false
+          advanced-security: false
+          annotations: true
+          config: .github/zizmor.yml
+
+  # 彙總：分支保護與 git-guard 只需要看這一個 check。
+  ci:
+    name: ci
+    if: ${{ always() }}
+    needs: [test, fasting-browser, typecheck, lint]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: All jobs passed
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "results: $RESULTS"
+          for r in $RESULTS; do
+            [ "$r" = success ] || exit 1
+          done
